@@ -30,9 +30,10 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
-
-
+A = X * all_theta';
+%disp(size(A));
+[x, p] = max(A, [], 2);
+%disp(size(p));
 
 
 
