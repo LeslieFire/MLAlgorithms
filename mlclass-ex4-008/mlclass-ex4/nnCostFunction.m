@@ -90,6 +90,7 @@ Theta2Temp(:,1) = 0;
 J = J + (lambda / ( 2 * m ) * (sum((Theta1Temp.^2)(:)) + sum((Theta2Temp.^2)(:))));
 %disp(size(J))
 
+%t = 1;
 
 for t = 1:m
     a_1 = [1 ; X(t, :)'];
@@ -100,6 +101,8 @@ for t = 1:m
     a_3 = sigmoid(z_3);
     
     delta_3 = (a_3 - nny(t, :)');
+               %disp(nny(t, : ));
+               %disp(delta_3);
     delta_2 = Theta2' * delta_3;
     delta_2 = delta_2(2 : end).* sigmoidGradient(z_2);
                
@@ -107,8 +110,8 @@ for t = 1:m
     Theta2_grad = Theta2_grad + delta_3 * a_2';
 end
 
-Theta1_grad = Theta1_grad / m;
-Theta2_grad = Theta2_grad / m;
+Theta1_grad = Theta1_grad ./ m + Theta1Temp .*(lambda/m);
+Theta2_grad = Theta2_grad ./ m + Theta2Temp .*(lambda/m);
 
 
 
