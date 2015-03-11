@@ -15,8 +15,9 @@ sim = 0;
 %               sigma
 %
 %
+x = x1 - x2;
 
-
+sim = exp(- x' * x / (2 * sigma ^ 2));
 
 
 

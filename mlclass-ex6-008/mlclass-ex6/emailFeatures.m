@@ -49,7 +49,9 @@ x = zeros(n, 1);
 %
 
 
+word_indices = unique(word_indices);
 
+x(word_indices) = 1;
 
 
 

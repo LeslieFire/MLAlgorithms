@@ -23,7 +23,24 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+para = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
 
+min = 1.0;
+for c = para
+    for s = para
+        fprintf(['Current C = %f  sigma = %f\n'], c, s);
+        model= svmTrain(X, y, c, @(x1, x2) gaussianKernel(x1, x2, s));
+        predictions = svmPredict(model, Xval);
+        men = mean(double(predictions ~= yval));
+        if men < min
+            min = men;
+            C = c;
+            sigma = s;
+        end
+        fprintf(['Minimum error is %f with C = %f and sigma = %f\n'], min, C, sigma);
+    end
+
+end
 
 
 
